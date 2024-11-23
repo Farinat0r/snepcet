@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snapchat Customization</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .left, .right {
+      flex: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .left {
+      background-color: #ffffff;
+    }
+    .right {
+      background-color: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    .phone-frame {
+      position: relative;
+      width: 240px;
+      height: 480px;
+      background: #333;
+      border-radius: 24px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .phone-screen {
+      width: 200px;
+      height: 400px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 10px;
+      position: relative;
+      gap: 15px;
+    }
+    .notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 20px;
+      background: #222;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      z-index: 1;
+    }
+    .app-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+    .app {
+      width: 40px;
+      height: 40px;
+      background-color: #ddd;
+      border-radius: 10px;
+    }
+    #snapchat {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
+
+    #snapchat canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+    .app-name {
+      font-size: 12px;
+      color: #333;
+    }
+    #snapchat-description {
+      font-size: 10px;
+      color: #555;
+      margin-top: 4px;
+    }
+    .control-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    label {
+      font-size: 12px;
+      color: #333;
+    }
+    input[type="color"], input[type="range"], input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 12px;
+    }
+    @media (min-width: 768px) {
+      body {
+        flex-direction: row;
+      }
+      .left, .right {
+        flex: 1;
+        padding: 20px;
+      }
+      .phone-frame {
+        width: 320px;
+        height: 640px;
+      }
+      .phone-screen {
+        width: 280px;
+        height: 600px;
+      }
+      #snapchat {
+        width: 80px;
+        height: 80px;
+      }
+      input[type="color"], input[type="range"], input[type="number"] {
+        width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="left">
+    <div class="phone-frame">
+      <div class="notch"></div>
+      <div class="phone-screen">
+        <div class="app-container">
+          <div class="app"></div>
+          <div class="app-name">App 1</div>
+        </div>
+        <div class="app-container">
+          <div class="app"></div>
+          <div class="app-name">App 2</div>
+        </div>
+        <div class="app-container">
+          <div id="snapchat">
+            <canvas id="myCanvas" width="60" height="60"></canvas>
+          </div>
+          <div>
+            <div class="app-name">Snapchat</div>
+            <div id="snapchat-description">A multimedia messaging app for sharing photos and videos.</div>
+          </div>
+        </div>
+        <div class="app-container">
+          <div class="app"></div>
+          <div class="app-name">App 3</div>
+        </div>
+        <div class="app-container">
+          <div class="app"></div>
+          <div class="app-name">App 4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="control-group">
+      <label for="bg-color">Background Color:</label>
+      <input type="color" id="bg-color" value="#ffff00">
+    </div>
+    <div class="control-group">
+      <label for="stroke-color">Stroke Color:</label>
+      <input type="color" id="stroke-color" value="#000000">
+    </div>
+    <div class="control-group">
+      <label for="stroke-width">Stroke Width:</label>
+      <input type="range" id="stroke-width" min="1" max="20" value="15">
+    </div>
+    <div class="control-group">
+      <label for="size">Size (px):</label>
+      <input type="number" id="size" min="50" max="200" value="80">
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const bgColorInput = document.getElementById("bg-color");
+    const strokeColorInput = document.getElementById("stroke-color");
+    const strokeWidthInput = document.getElementById("stroke-width");
+    const sizeInput = document.getElementById("size");
+
+    function drawSnapchatLogo() {
+      const bgColor = bgColorInput.value;
+      const strokeColor = strokeColorInput.value;
+      const strokeWidth = strokeWidthInput.value;
+
+      const size = parseInt(sizeInput.value);
+      canvas.width = size;
+      canvas.height = size;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.beginPath();
+      ctx.scale(size / 400, size / 400);
+      ctx.moveTo(200.00, 336.00);
+      ctx.bezierCurveTo(218.00, 343.00, 237.00, 323.00, 256.00, 310.00);
+      ctx.bezierCurveTo(283.00, 309.00, 272.00, 307.00, 302.00, 312.00);
+      ctx.bezierCurveTo(307.00, 271.00, 315.00, 309.00, 346.00, 276.00);
+      ctx.bezierCurveTo(329.00, 274.00, 279.00, 242.00, 279.00, 205.00);
+      ctx.bezierCurveTo(295.00, 192.00, 303.00, 200.00, 314.00, 185.00);
+      ctx.bezierCurveTo(311.00, 158.00, 286.00, 189.00, 277.00, 176.00);
+      ctx.bezierCurveTo(289.00, 95.00, 253.00, 64.00, 202.00, 63.00);
+      ctx.bezierCurveTo(145.00, 62.00, 110.00, 97.00, 122.00, 174.00);
+      ctx.bezierCurveTo(111.00, 194.00, 98.00, 160.00, 85.00, 182.00);
+      ctx.bezierCurveTo(84.00, 200.00, 105.00, 189.00, 119.00, 206.00);
+      ctx.bezierCurveTo(128.00, 223.00, 86.00, 274.00, 53.00, 273.00);
+      ctx.bezierCurveTo(64.00, 302.00, 100.00, 277.00, 95.00, 311.00);
+      ctx.bezierCurveTo(170.00, 299.00, 150.00, 337.00, 200.00, 338.00);
+      ctx.closePath();
+
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = strokeWidth;
+      ctx.stroke();
+      ctx.fillStyle = "white";
+      ctx.fill();
+    }
+
+    bgColorInput.addEventListener("input", drawSnapchatLogo);
+    strokeColorInput.addEventListener("input", drawSnapchatLogo);
+    strokeWidthInput.addEventListener("input", drawSnapchatLogo);
+    sizeInput.addEventListener("input", drawSnapchatLogo);
+
+    drawSnapchatLogo();
+  </script>
+</body>
+</html>
