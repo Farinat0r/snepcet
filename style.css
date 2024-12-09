@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: ui-rounded, 'Hiragino Maru Gothic ProN', 
+  Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', 
+  Calibri, source-sans-pro, sans-serif;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 10vh;
+  height: 10vh;
+  padding: 1vh 2vw;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+  z-index: 1;
+}
+header svg {
+  width: 4vh;
+  height: 4vh;
+}
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 2vh;
+}
+.header-right {
+  gap: 1.5vh;
+}
+.header-left span {
+  font-size: 2vh;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 2vh;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+}
+.nav-link:hover {
+  color: #555;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: center;
+}
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('images/snepcet.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  filter: blur(2vw);
+  z-index: 0;
+}
+.left, .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.left {
+  background-color: #ffffff;
+}
+.right {
+  background-color: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.phone-frame {
+  position: relative;
+  width: 320px;
+  height: 640px;
+  background: #333;
+  border-radius: 36px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.phone-screen {
+  width: 280px;
+  height: 600px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  gap: 20px;
+  background-image: url('images/background.jpg');
+  background-size: cover;
+}
+.notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 40px;
+  background: #222;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  z-index: 1;
+}
+.app-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.app {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+#snapchat {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+.app-logo {
+  width: 50px;
+  height: 50px;
+}
+
+#snapchat canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 15px;
+}
+.app-name {
+  font-size: 14px;
+}
+#snapchat-description {
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+.controls {
+  z-index: 1;
+}
+.control-group {
+  width: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+label {
+  font-size: 14px;
+  color: #333;
+}
+input[type="color"], input[type="range"], input[type="number"] {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+#size {
+  width: calc(100% - 10px);
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+  header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+    height: 10vh;
+  }
+}
